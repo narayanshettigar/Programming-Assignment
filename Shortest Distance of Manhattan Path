@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] start = new int[2];
+        System.out.print("Enter the starting point as two space-separated integers (x y): ");
+        start[0] = scanner.nextInt();
+        start[1] = scanner.nextInt();
+        System.out.print("Enter the path as a string: ");
+        String path = scanner.next();
+        double distance = shortestDistance(start, path);
+        if(distance == 0) {
+            System.out.println("0");
+        } else {
+            System.out.printf("%.1f", distance);
+        }
+    }
+    
+    public static double shortestDistance(int[] start, String path) {
+        int x = start[0];
+        int y = start[1];
+        for(char c : path.toCharArray()) {
+            switch(c) {
+                case 'N':
+                    y++;
+                    break;
+                case 'S':
+                    y--;
+                    break;
+                case 'E':
+                    x++;
+                    break;
+                case 'W':
+                    x--;
+                    break;
+            }
+        }
+        int dx = x - start[0];
+        int dy = y - start[1];
+        if(dx == 0 && dy == 0) {
+            return 0;
+        }
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+}
