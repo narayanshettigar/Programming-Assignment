@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class Main {
+
+    public static int minmax(int[] a, int[] b) {
+        int n = a.length;
+
+        // Iterate over both arrays at the same time
+        for (int i = 0; i < n; i++) {
+            if (a[i] < b[i]) {
+                // If element at index i in array a is smaller than that in array b, swap them
+                int temp = a[i];
+                a[i] = b[i];
+                b[i] = temp;
+            } else {
+                continue;
+            }
+        }
+
+        // Compute the product of the maximum elements in both arrays
+        int maxA = Integer.MIN_VALUE;
+        int maxB = Integer.MIN_VALUE;
+        
+        for(int i=0; i<a.length; i++){
+            maxA=Math.max(maxA,a[i]);
+            maxB=Math.max(maxB,b[i]);
+        }
+        return maxA * maxB;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 2, 6, 5, 1, 2};
+        int[] b = {3, 4, 3, 2, 2, 5};
+        System.out.println(minmax(a, b));  // Expected output: 18
+
+        int[] c = {8,7,9,6,5,6,6,5,6,4,6,7,8,5,4,3,2,1,4,5,6,7,8,7,8};
+        int[] d = {2,4,5,6,7,6,7,8,9,8,7,6,7,6,5,4,3,2,3,4,5,5,5,4,5};
+        System.out.println(minmax(c, d));  // Expected output: 63
+    }
+}
